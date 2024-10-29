@@ -1,46 +1,22 @@
-document.addEventListener('contextmenu', (event) => {
-    event.preventDefault(); // Disable right-click context menu
-});
-
-
 let tasks = [];
 
-// Change 'talkButton' to match your button if needed
-document.querySelector('button').addEventListener('click', () => {
-    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-    const responseArea = document.getElementById('responseArea');
-
-    recognition.onstart = () => {
-        responseArea.textContent = "Listening...";
-    };
-
-    recognition.onresult = (event) => {
-        const transcript = event.results[0][0].transcript.toLowerCase();
-        responseArea.textContent = `You said: ${transcript}`;
-        handleCommand(transcript);
-    };
-
-    recognition.onerror = (event) => {
-        responseArea.textContent = 'Error occurred: ' + event.error;
-    };
-
-    recognition.onend = () => {
-        responseArea.textContent += " Listening ended.";
-    };
-
-    recognition.start();
-});
+// Load tasks from localStorage when the page is loaded
+window.onload = () => {
+    const savedTasks = localStorage.getItem('tasks');
+    if (savedTasks) {
+        tasks = JSON.parse(savedTasks);
+    }
+};
 
 function handleCommand(command) {
     const responseArea = document.getElementById('responseArea');
-
-    // Normalize command to lowercase for easier matching
     const normalizedCommand = command.toLowerCase();
 
     if (normalizedCommand.includes("add")) {
         const task = normalizedCommand.replace("add", "").replace("to my tasks", "").trim();
         if (task) {
             tasks.push(task);
+            saveTasks(); // Save to localStorage
             respond(`Added task: ${task}`);
         } else {
             respond("Please specify a task to add.");
@@ -57,6 +33,7 @@ function handleCommand(command) {
         const taskToRemove = normalizedCommand.replace("remove", "").replace("from my tasks", "").trim();
         if (taskToRemove) {
             tasks = tasks.filter(task => task !== taskToRemove);
+            saveTasks(); // Save to localStorage
             respond(`Removed task: ${taskToRemove}`);
         } else {
             respond("Please specify a task to remove.");
@@ -73,8 +50,10 @@ function handleCommand(command) {
     }
 }
 
-
-
+// Function to save tasks to localStorage
+function saveTasks() {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+}
 
 function respond(message) {
     const responseArea = document.getElementById('responseArea');
