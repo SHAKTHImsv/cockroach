@@ -1,11 +1,23 @@
 let tasks = [];
 
+// Disable right-click context menu
+window.addEventListener('contextmenu', (event) => {
+    event.preventDefault();
+});
+
 // Load tasks from localStorage when the page is loaded
 window.onload = () => {
     const savedTasks = localStorage.getItem('tasks');
     if (savedTasks) {
         tasks = JSON.parse(savedTasks);
     }
+};
+
+// Handle the command when the button is clicked
+document.getElementById('submitCommand').onclick = () => {
+    const commandInput = document.getElementById('commandInput');
+    handleCommand(commandInput.value);
+    commandInput.value = ''; // Clear input after processing
 };
 
 function handleCommand(command) {
