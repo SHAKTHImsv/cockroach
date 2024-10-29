@@ -42,7 +42,7 @@ function handleCommand(command) {
         } else {
             respond("Please specify a task to add.");
         }
-    } else if (command.includes("what's on my to-do list") || command.includes("check my tasks") ||("show my task")) {
+    } else if (command.includes("what's on my to-do list") || command.includes("check my tasks") || command.includes("show my task")) {
         if (tasks.length === 0) {
             respond("You have no tasks in your to-do list.");
         } else {
