@@ -34,37 +34,45 @@ document.querySelector('button').addEventListener('click', () => {
 function handleCommand(command) {
     const responseArea = document.getElementById('responseArea');
 
-    if (command.includes("add")) {
-        const task = command.replace("add", "").replace("to my tasks", "").trim();
+    // Normalize command to lowercase for easier matching
+    const normalizedCommand = command.toLowerCase();
+
+    if (normalizedCommand.includes("add")) {
+        const task = normalizedCommand.replace("add", "").replace("to my tasks", "").trim();
         if (task) {
             tasks.push(task);
             respond(`Added task: ${task}`);
         } else {
             respond("Please specify a task to add.");
         }
-    } else if (command.includes("what's on my to-do list") || command.includes("check my tasks") || command.includes("show my task")) {
+    } else if (normalizedCommand.includes("what's on my to-do list") || 
+               normalizedCommand.includes("check my tasks") || 
+               normalizedCommand.includes("show my tasks")) {
         if (tasks.length === 0) {
             respond("You have no tasks in your to-do list.");
         } else {
             respond(`Your tasks are: ${tasks.join(", ")}`);
         }
-    } else if (command.includes("remove")) {
-        const taskToRemove = command.replace("remove", "").replace("from my tasks", "").trim();
+    } else if (normalizedCommand.includes("remove")) {
+        const taskToRemove = normalizedCommand.replace("remove", "").replace("from my tasks", "").trim();
         if (taskToRemove) {
             tasks = tasks.filter(task => task !== taskToRemove);
             respond(`Removed task: ${taskToRemove}`);
         } else {
             respond("Please specify a task to remove.");
         }
-    } else if (command.includes("who is the founder of you") || command.includes("who is your boss")) {
+    } else if (normalizedCommand.includes("who is the founder of you") || 
+               normalizedCommand.includes("who is your boss")) {
         respond("My boss is the great Mr. Shakthivishwa.");
-    } else if (command.includes("what time is it") || command.includes("tell me the time")) {
+    } else if (normalizedCommand.includes("what time is it") || 
+               normalizedCommand.includes("tell me the time")) {
         const currentTime = new Date().toLocaleTimeString(); // Get the current time
         respond(`The current time is ${currentTime}.`);
     } else {
         respond("I didn't understand that command.");
     }
 }
+
 
 
 
