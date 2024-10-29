@@ -42,7 +42,7 @@ function handleCommand(command) {
         } else {
             respond("Please specify a task to add.");
         }
-    } else if (command.includes("what's on my to-do list") || command.includes("check my tasks")) {
+    } else if (command.includes("what's on my to-do list") || command.includes("check my tasks") ||("show my task")) {
         if (tasks.length === 0) {
             respond("You have no tasks in your to-do list.");
         } else {
@@ -58,10 +58,14 @@ function handleCommand(command) {
         }
     } else if (command.includes("who is the founder of you") || command.includes("who is your boss")) {
         respond("My boss is the great Mr. Shakthivishwa.");
+    } else if (command.includes("what time is it") || command.includes("tell me the time")) {
+        const currentTime = new Date().toLocaleTimeString(); // Get the current time
+        respond(`The current time is ${currentTime}.`);
     } else {
         respond("I didn't understand that command.");
     }
 }
+
 
 
 function respond(message) {
