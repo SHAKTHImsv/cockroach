@@ -1,0 +1,85 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f0f0f0; /* Light background for better contrast */
+    user-select: none;
+}
+
+.main {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center align items horizontally */
+    justify-content: center; /* Center align items vertically */
+    background: #000; /* Dark background for the assistant */
+    color: #fff; /* White text for better visibility */
+}
+
+.image-container {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the image container */
+}
+
+.image {
+    width: 170px; /* Width of the circular container */
+    height: 170px; /* Height of the circular container */
+    border-radius: 50%; /* Makes the container circular */
+    overflow: hidden; /* Ensures the image doesn't overflow */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #00bcd4; /* Optional: background color for the circle */
+}
+
+.image img {
+    width: 100%; /* Ensures the image covers the container */
+    height: auto; /* Maintains aspect ratio */
+}
+
+.image-container h1 {
+    color: #00bcd4; /* Accent color */
+    margin: 20px 0 10px; /* Space around headings */
+    font-size: 40px;
+    text-align: center; /* Center text */
+}
+
+.image-container p {
+    color: #fff; /* Changed to white for better visibility */
+    margin-bottom: 40px;
+    font-size: 20px;
+}
+
+.input {
+    cursor: pointer;
+    margin: 20px 0; /* Space around input */
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 20px;
+    border: none;
+    border-radius: 20px;
+    background: rgb(202, 253, 255, 0.5); /* Semi-transparent background */
+    color: #00bcd4; /* Accent color */
+    transition: background-color 0.3s, transform 0.3s;
+    cursor: pointer; /* Pointer cursor for buttons */
+}
+
+button:hover {
+    background-color: rgba(202, 253, 255, 0.7); /* Darken on hover */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+.response {
+    color: #00bcd4; /* Accent color for responses */
+    text-align: center;
+    margin-top: 20px;
+    font-size: 24px;
+}
