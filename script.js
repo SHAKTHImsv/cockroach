@@ -13,11 +13,22 @@ window.onload = () => {
     }
 };
 
-// Handle the command when the button is clicked
+// Handle the button click for voice command
 document.getElementById('submitCommand').onclick = () => {
-    const commandInput = document.getElementById('commandInput');
-    handleCommand(commandInput.value);
-    commandInput.value = ''; // Clear input after processing
+    // Use the Web Speech API to capture voice commands
+    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    recognition.lang = 'en-US';
+
+    recognition.onresult = (event) => {
+        const command = event.results[0][0].transcript;
+        handleCommand(command);
+    };
+
+    recognition.onerror = (event) => {
+        respond("Sorry, I didn't catch that. Please try again.");
+    };
+
+    recognition.start();
 };
 
 function handleCommand(command) {
