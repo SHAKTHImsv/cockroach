@@ -22,8 +22,8 @@ function handleCommand(command) {
             respond("Please specify a task to add.");
         }
     } else if (normalizedCommand.includes("what's on my to-do list") || 
-               normalizedCommand.includes("check my tasks") || 
-               normalizedCommand.includes("show my tasks")) {
+               normalizedCommand.includes("check my task") || 
+               normalizedCommand.includes("show my task")) {
         if (tasks.length === 0) {
             respond("You have no tasks in your to-do list.");
         } else {
